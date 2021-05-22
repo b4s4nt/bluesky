@@ -37,7 +37,7 @@ class DisplayDataCommand extends Command
 
 //        $output->writeln("Displaying data from database completed: ");
 
-       
+
     }
 
     private function getDatafrmDatabase(string $tablename, array $connectionParams)
