@@ -2,6 +2,14 @@
     "name": "basanta/bluesky_composer",
     "description": "Composer project task of bluesky",
     "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Console\\": "src"
+        },
+        "classmap": [
+            "src"
+        ]
+    },
     "require": {
         "symfony/console": " ^4.4",
         "doctrine/dbal": " ^3.1"

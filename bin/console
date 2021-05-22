@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+// This is For autoloading all package and their dependencies included in vendor
+require_once __DIR__ . "/../vendor/autoload.php";
+
+use Symfony\Component\Console\Application;
+
+$app = new Application();
+$app ->run();
