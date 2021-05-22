@@ -1,0 +1,9 @@
+{
+    "name": "basanta/bluesky_composer",
+    "description": "Composer project task of bluesky",
+    "type": "project",
+    "require": {
+        "symfony/console": " ^4.4",
+        "doctrine/dbal": " ^3.1"
+    }
+}
