@@ -4,6 +4,8 @@
 namespace Console\App\Commands;
 
 
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,7 +23,7 @@ class CreateDatabaseCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf('Welcome !, %s', $input->getArgument('databasename'), 'To CreateDatabase'));
+        $output->writeln(sprintf('Welcome  ! To Create Database: , %s', $input->getArgument('databasename')));
         // Create Database
         $this->createDatabase(
             $input->getArgument('databasename'),
@@ -32,21 +34,23 @@ class CreateDatabaseCommand extends Command
                 'password' => '',
             )
         );
-      //  return Command::SUCCESS;
+        //  return Command::SUCCESS;
     }
 
-    private function createDatabase(string $name, array $config)
+    private function createDatabase($name, array $config)
     {
 //        /** @var \Doctrine\DBAL\Connection */
 
-        $tmpConnection = \Doctrine\DBAL\DriverManager::getConnection($config);
-
-        // Check if the database already exists
-        if (in_array($name, $tmpConnection->getSchemaManager()->listDatabases())) {
-            return;
+        try {
+            $tmpConnection = DriverManager::getConnection($config);
+            // Check if the database already exists
+            if (in_array($name, $tmpConnection->getSchemaManager()->listDatabases())) {
+                return;
+            }
+            // Create the database
+            $tmpConnection->getSchemaManager()->createDatabase($name);
+            $tmpConnection->close();
+        } catch (Exception $e) {
         }
-        // Create the database
-        $tmpConnection->getSchemaManager()->createDatabase($name);
-        $tmpConnection->close();
     }
 }

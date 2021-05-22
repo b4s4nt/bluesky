@@ -7,4 +7,7 @@ use Symfony\Component\Console\Application;
 
 $app = new Application();
 $app->add(new \Console\App\Commands\CreateDatabaseCommand());
+$app->add(new \Console\App\Commands\CreateTableCommand());
+$app->add(new \Console\App\Commands\DisplayDataCommand());
+$app->add(new \Console\App\Commands\InsertDataCommand());
 $app->run();
