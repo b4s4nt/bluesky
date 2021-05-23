@@ -1,20 +1,6 @@
 This is a project using composer doctrine DBAL package and symfony console which does followings
 :
-0 Command to see all command is bin/console enter
-
-Available commands:
-
-createdatabase :   createdatabase space databasename
-
-createtable  :    createtable tablename space databasename
-
-getdata    :      getdata tablename space databasename
-
-help      :       Display help for a command
-
-insert      :     insert space tablename spcae databasename space firstname space lastname space email space website
-
-list       :      List commands
+0
 
 1 Creates Database with given database name. The command to create database is createdatabase on the console :
 
@@ -39,3 +25,21 @@ databasename is getdata
 Command getdata is follow:
 
 bin/console space getdata space tablename space databasename. 
+
+
+
+Command to see all command is bin/console enter
+
+Available commands:
+
+createdatabase :   createdatabase space databasename
+
+createtable  :    createtable tablename space databasename
+
+getdata    :      getdata tablename space databasename
+
+help      :       Display help for a command
+
+insert      :     insert space tablename spcae databasename space firstname space lastname space email space website
+
+list       :      List commands
