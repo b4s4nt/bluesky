@@ -1,9 +1,6 @@
 <?php
-
-
 namespace Console\App\Commands;
-
-
+require_once '../Model/CreateDatabase.php';
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception;
 use Symfony\Component\Console\Command\Command;
@@ -24,7 +21,10 @@ class CreateDatabaseCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(sprintf('Welcome  ! To Create Database: , %s', $input->getArgument('databasename')));
+
+
         // Create Database
+
         $this->createDatabase(
             $input->getArgument('databasename'),
             array(
@@ -34,7 +34,7 @@ class CreateDatabaseCommand extends Command
                 'password' => '',
             )
         );
-        //  return Command::SUCCESS;
+
     }
 
     private function createDatabase($name, array $config)
@@ -51,6 +51,7 @@ class CreateDatabaseCommand extends Command
             $tmpConnection->getSchemaManager()->createDatabase($name);
             $tmpConnection->close();
         } catch (Exception $e) {
+            var_dump("Exceptional Error At CreateDatabase:".$e->getMessage());
         }
     }
 }

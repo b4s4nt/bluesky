@@ -1,9 +1,8 @@
 <?php
 
-
 namespace Console\App\Commands;
 
-
+use Doctrine\DBAL\Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,40 +16,44 @@ class DisplayDataCommand extends Command
         $this->setName('getdata')
             ->setHelp("Console command to get data from database")
             ->setDescription('getdata with name of database and table ')
-            ->addArgument('tablename', InputArgument::REQUIRED, 'Give Your Table Name');
+            ->addArgument('tablename', InputArgument::REQUIRED, 'Give Your Table Name')
+            ->addArgument('databasename', InputArgument::REQUIRED, 'Give Your Database Name');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf('Welcome ! to create table, %s', $input->getArgument('tablename')));
+        $tablename = $input->getArgument('tablename');
+        $databasename = $input->getArgument('databasename');
+        $output->writeln(sprintf('Welcome ! to getdata from table, %s', $input->getArgument('tablename')));
         // Create Database
         $this->getDatafrmDatabase(
-            'basanta',
+            $tablename,
             array(
-                'dbname' => 'basanta',
+                'dbname' => $databasename,
                 'user' => 'root',
                 'password' => '',
                 'host' => 'localhost',
                 'driver' => 'pdo_mysql'
             )
         );
-
-//        $output->writeln("Displaying data from database completed: ");
-
-
     }
 
     private function getDatafrmDatabase(string $tablename, array $connectionParams)
     {
         var_dump("Retrieving  Data Into Database...");
-        $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
+        try {
+            $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
 
-        //$sql = "SELECT * FROM basanta WHERE name = ?";
-        $sql = "SELECT * FROM basanta";
-        $stmt = $conn->query($sql);
-        while (($row = $stmt->fetchAssociative()) !== false) {
-            var_dump($row);
-            echo $row['name'];
+            //$sql = "SELECT * FROM basanta WHERE name = ?";
+            $sql = "SELECT * FROM " . $tablename;
+            $stmt = $conn->query($sql);
+            echo "\n Name \t\t Email \t\t\t\t Website \n\n";
+            while (($row = $stmt->fetchAssociative()) !== false) {
+                // var_dump($row['name']);
+                echo $row['name'] . "\t" . $row['email'] . "\t\t" . $row['website'] . " \n";
+            }
+        } catch (Exception $e) {
+            var_dump("Exceptional Error At CreateDatabase:" . $e->getMessage());
         }
     }
 }
