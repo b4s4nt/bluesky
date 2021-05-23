@@ -43,3 +43,17 @@ help      :       Display help for a command
 insert      :     insert space tablename spcae databasename space firstname space lastname space email space website
 
 list       :      List commands
+
+
+
+
+Localhost Info:
+
+
+'driver' => 'pdo_mysql',
+
+'host' => '127.0.0.1',
+
+'user' => 'root',
+
+'password' => '',
