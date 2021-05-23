@@ -25,7 +25,8 @@ class CreateTableCommand extends Command
     {
         $tablename = $input->getArgument('tablename');
         $databasename = $input->getArgument('databasename');
-//        // Create Table
+        $output->writeln(sprintf('Welcome  ! To Create Table : , %s', $input->getArgument('tablename')));
+//        // Create Table Method Calling
         $this->createTable(
             $tablename,
             array(
@@ -38,11 +39,10 @@ class CreateTableCommand extends Command
         );
     }
 
+    //Create Table Method
     public function createTable($tablename, array $connectionParams)
     {
         /* Connect to the database */
-
-
         try {
             $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
             $schema = $conn->getSchemaManager();
@@ -68,7 +68,7 @@ class CreateTableCommand extends Command
                 //  $queries = $schema->toSql($platform);
             }
         } catch (Exception $e) {
-            var_dump("Exceptional Error At CreateDatabase:".$e->getMessage());
+            var_dump("Exceptional Error At CreateDatabase:" . $e->getMessage());
         }
     }
 }

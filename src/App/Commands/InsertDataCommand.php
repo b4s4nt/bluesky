@@ -14,6 +14,7 @@ class InsertDataCommand extends Command
 {
     protected function configure()
     {
+        // Calling insert method
         $this->setName('insert')
             ->setHelp("Console command to Insert Data Into Database")
             ->setDescription(
@@ -28,11 +29,14 @@ class InsertDataCommand extends Command
             );
     }
 
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $tablename = $input->getArgument('tablename');
         $databasename = $input->getArgument('databasename');
         $info = $input->getArgument('info');
+        $output->writeln(sprintf('Welcome  ! To Insert Info Into Table : , %s', $tablename));
+
         // Insert Data
         $this->insertData(
             $tablename,
@@ -47,7 +51,9 @@ class InsertDataCommand extends Command
         );
     }
 
-    private function insertData(string $tablename, array $info, array $connectionParams)
+
+    // Method insertData
+    private function insertData($tablename, array $info, array $connectionParams)
     {
         try {
             $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);

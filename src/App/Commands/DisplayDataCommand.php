@@ -25,7 +25,10 @@ class DisplayDataCommand extends Command
         $tablename = $input->getArgument('tablename');
         $databasename = $input->getArgument('databasename');
         $output->writeln(sprintf('Welcome ! to getdata from table, %s', $input->getArgument('tablename')));
-        // Create Database
+        $output->writeln(sprintf('Welcome  ! To Display Table : , %s', $input->getArgument('tablename')));
+
+
+        // Create Database Calling Method
         $this->getDatafrmDatabase(
             $tablename,
             array(
@@ -38,14 +41,19 @@ class DisplayDataCommand extends Command
         );
     }
 
+
+    // Get Data method
     private function getDatafrmDatabase(string $tablename, array $connectionParams)
     {
         var_dump("Retrieving  Data Into Database...");
         try {
+            // Getting connection from database
             $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
 
+            // MYSQL query
             //$sql = "SELECT * FROM basanta WHERE name = ?";
             $sql = "SELECT * FROM " . $tablename;
+            //Eexecute Query
             $stmt = $conn->query($sql);
             echo "\n Name \t\t Email \t\t\t\t Website \n\n";
             while (($row = $stmt->fetchAssociative()) !== false) {

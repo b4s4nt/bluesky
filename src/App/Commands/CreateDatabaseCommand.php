@@ -24,7 +24,7 @@ class CreateDatabaseCommand extends Command
         $output->writeln(sprintf('Welcome  ! To Create Database: , %s', $input->getArgument('databasename')));
 
 
-        // Create Database
+        // Create Database Method Calling
 
         $this->createDatabase(
             $input->getArgument('databasename'),
@@ -37,11 +37,13 @@ class CreateDatabaseCommand extends Command
         );
     }
 
+// Create Database Method
     private function createDatabase($name, array $config)
     {
 //        /** @var \Doctrine\DBAL\Connection */
 
         try {
+            //Creating Connection using doctrine dbal drivemanager
             $tmpConnection = DriverManager::getConnection($config);
             // Check if the database already exists
             if (in_array($name, $tmpConnection->getSchemaManager()->listDatabases())) {
