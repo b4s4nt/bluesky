@@ -16,7 +16,7 @@ class CreateTableCommand extends Command
     {
         $this->setName('createtable')
             ->setHelp("Console command to create table on given database name")
-            ->setDescription('createtable  with tablename space databasename as argument')
+            ->setDescription('createtable   tablename space databasename ')
             ->addArgument('tablename', InputArgument::REQUIRED, 'Give Your Table Name')
             ->addArgument('databasename', InputArgument::REQUIRED, 'Give Your Existing Database Name:');
     }

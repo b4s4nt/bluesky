@@ -15,7 +15,7 @@ class DisplayDataCommand extends Command
     {
         $this->setName('getdata')
             ->setHelp("Console command to get data from database")
-            ->setDescription('getdata with name of database and table ')
+            ->setDescription('getdata  tablename space databasename ')
             ->addArgument('tablename', InputArgument::REQUIRED, 'Give Your Table Name')
             ->addArgument('databasename', InputArgument::REQUIRED, 'Give Your Database Name');
     }

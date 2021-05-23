@@ -16,7 +16,9 @@ class InsertDataCommand extends Command
     {
         $this->setName('insert')
             ->setHelp("Console command to Insert Data Into Database")
-            ->setDescription('Insert Your Info with Spcae as: tablename databasename firstname lastname email website')
+            ->setDescription(
+                'insert space tablename spcae databasename space firstname space lastname space email  space website'
+            )
             ->addArgument('tablename', InputArgument::REQUIRED, 'Give Your TableName')
             ->addArgument('databasename', InputArgument::REQUIRED, 'Give Your DatabaseName')
             ->addArgument(
